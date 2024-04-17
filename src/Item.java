@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 /**
  * Clase Item
  */
@@ -8,12 +10,14 @@ public class Item {
 
     /**
      * Constructor de la clase item
-     * @param descripcion
-     * @param peso
-     * @param valor
+     * @param descripcion descripción del item
+     * @param peso peso del item den kg
+     * @param valor valor en monedas del item
      */
     public Item(String descripcion, double peso, double valor) {
-
+        this.descripcion=descripcion;
+        this.peso=peso;
+        this.valor=valor;
     }
 
     /**
@@ -44,23 +48,23 @@ public class Item {
      * Método sobreescrito para devolver la información de un item
      * TODO Método para devolver un String con la información del item en el formato
      *  descrito en la memoria de la práctica P.e: "Espada Mágica (Peso: 1,5, Valor: 100,0)"
-     * @return
+     * @return toString de la clase Item
      */
     @Override
     public String toString() {
-        return
+        return this.descripcion+" (Peso: "+this.peso+", Valor: "+this.valor+")";
     }
 
     /**
      * Método que sobreescribe el comportamiento de equals
      *  TODO Método para comparar si el objeto pasado como parámetro es igual a este,
      *      hay que comparar los parámetros internos del objeto (peso, valor, descripción)
-     * @param obj
+     * @param obj pasado por parámetro, se comparará con el objeto Item
      * @return True en caso de ser igual, false en otro caso
      */
     @Override
     public boolean equals(Object obj) {
-
-        return
+        Item item = (Item) obj;
+        return (this.descripcion.equals(item.getDescripcion()) && this.valor==item.getValor() && this.peso==item.getPeso());
     }
 }
