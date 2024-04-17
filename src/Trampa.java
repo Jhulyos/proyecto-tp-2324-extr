@@ -7,11 +7,12 @@ public class Trampa {
 
     /**
      * Constructor de la clase Trampa
-     * @param descripcion
-     * @param danyo
+     * @param descripcion descripción de la trampa
+     * @param danyo daño que hará la trampa sobre el jugador
      */
     public Trampa(String descripcion, int danyo) {
-
+        this.descripcion=descripcion;
+        this.danyo=danyo;
     }
 
     /**

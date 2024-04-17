@@ -1,10 +1,8 @@
 import java.util.Scanner;
-
 /**
  * Clase Utilidades
  */
 public class Utilidades {
-
     /**
      * Método estático leerCadena para leer un cadena de carecteres por pantalla
      * TODO leer por pantalla y comprobar que es una cadena de caracteres válida. 
