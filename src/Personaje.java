@@ -13,16 +13,22 @@ public class Personaje {
 
     /**
      * Constructor de la clase para inicializar todos los atributos
-     * @param nombre
-     * @param vida
-     * @param ataque
-     * @param defensa
-     * @param destreza
-     * @param maxItemsPorPersonaje
-     * @param maxPesoPorPersonaje
+     * @param nombre Nombre del personaje
+     * @param vida puntos de vida que tiene el personaje
+     * @param ataque puntos de ataque que tiene el personaje
+     * @param defensa puntos de defensa que tiene el personaje
+     * @param destreza puntos de destreza que tiene el presonaje
+     * @param maxItemsPorPersonaje máximo número de items que puede llevar el personaje
+     * @param maxPesoPorPersonaje peso máximo que puede llevar el personaje
      */
     public Personaje(String nombre, int vida, int ataque, int defensa, int destreza, int maxItemsPorPersonaje, double maxPesoPorPersonaje) {
-
+        this.nombre=nombre;
+        this.vida=vida;
+        this.ataque=ataque;
+        this.defensa=defensa;
+        this.destreza=destreza;
+        this.maxPesoPorPersonaje=maxPesoPorPersonaje;
+        this.items=new Item[maxItemsPorPersonaje];
     }
 
     /**
