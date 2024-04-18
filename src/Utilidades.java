@@ -13,9 +13,9 @@ public class Utilidades {
     public static String leerCadena(Scanner teclado, String s) {
         String cadena;
         do{
-            System.out.println(s);
+            System.out.println(s); //Para esto es 's'?
             cadena=teclado.nextLine();
-        }while(cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$"));
+        }while(cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")); //A esto se refiere con cadena válida?
         return cadena;
     }
 

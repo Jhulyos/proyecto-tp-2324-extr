@@ -8,14 +8,17 @@ public class Monstruo {
     private final String nombre;
 
     /**
-     * Constructor clase Monstruo
-     * @param nombre
-     * @param vida
-     * @param ataque
-     * @param defensa
+     * Constructor de la clase Monstruo
+     * @param nombre nombre del monstruo
+     * @param vida puntos de vida del monstruo
+     * @param ataque puntos de ataque del monstruo
+     * @param defensa puntos de defensa del monstruo
      */
     public Monstruo(String nombre, int vida, int ataque, int defensa) {
-
+        this.nombre=nombre;
+        this.vida=vida;
+        this.ataque=ataque;
+        this.defensa=defensa;
     }
 
     /**
@@ -54,33 +57,33 @@ public class Monstruo {
      * Método recibirDanyo para calcular la vida restante
      * TODO actualizar la vida restante del monstruo despues de un ataque, siempre que el
      * valor de ataque sea positivo
-     * @param ataque
+     * @param ataque tipo int indica el daño recibido
      */
     public void recibirDanyo(int ataque) {
-
+        if(ataque>=0)vida-=ataque; //Y si es negativo?
     }
 
     /**
      * Método sobreescrito para devolver la información de un monstruo
-     * TODO Método para devolver un String con la información del monstruo en el formato
+     * Método para devolver un String con la información del monstruo en el formato
      *  descrito en la memoria de la práctica P.e: "[ Trasgo (V: 20, A: 5, D: 2) ]"
-     * @return
+     * @return toString que describe el monstruo
      */
     @Override
     public String toString() {
-        return
+        return"[ "+nombre+" (V: "+vida+", A: "+ataque+", D: "+defensa+") ]";
     }
 
     /**
      * Método que sobreescribe el comportamiento de equals
-     *  TODO Método para comparar si el objeto pasado como parámetro es igual a este,
+     *  Método para comparar si el objeto pasado como parámetro es igual a este,
      *      hay que comparar los parámetros internos del objeto (nombre, vida, ataque, defensa)
-     * @param obj
+     * @param obj pasado por parámetro se compara con los atributos de la clase
      * @return True en caso de ser igual, false en otro caso
      */
     @Override
     public boolean equals(Object obj) {
-
-        return
+        Monstruo monstruo = (Monstruo) obj;
+        return (this.nombre.equals(monstruo.getNombre()) && this.vida==monstruo.getVida() && this.ataque== monstruo.getAtaque() && this.defensa== monstruo.getDefensa());
     }
 }

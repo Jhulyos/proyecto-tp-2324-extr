@@ -46,7 +46,7 @@ public class Item {
 
     /**
      * Método sobreescrito para devolver la información de un item
-     * TODO Método para devolver un String con la información del item en el formato
+     * Método para devolver un String con la información del item en el formato
      *  descrito en la memoria de la práctica P.e: "Espada Mágica (Peso: 1,5, Valor: 100,0)"
      * @return toString de la clase Item
      */
@@ -57,9 +57,9 @@ public class Item {
 
     /**
      * Método que sobreescribe el comportamiento de equals
-     *  TODO Método para comparar si el objeto pasado como parámetro es igual a este,
+     *  Método para comparar si el objeto pasado como parámetro es igual a este,
      *      hay que comparar los parámetros internos del objeto (peso, valor, descripción)
-     * @param obj pasado por parámetro, se comparará con el objeto Item
+     * @param obj pasado por parámetro, se comparará con los atributos de la clase
      * @return True en caso de ser igual, false en otro caso
      */
     @Override

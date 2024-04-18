@@ -14,12 +14,12 @@ public class Sala {
 
     /**
      * Constructor de clase para inicializar los atributos de clase
-     * @param descripcion
-     * @param max_items
-     * @param max_monstruos
-     * @param maxTrampasPorSala
-     * @param fila
-     * @param columna
+     * @param descripcion texto que describe la sala
+     * @param max_items máximo número posible de items en la sala
+     * @param max_monstruos máximo número posible de monstruos en la sala
+     * @param maxTrampasPorSala máximo número posible de trampas en la sala
+     * @param fila número de fila del laberinto en la que se encuentra la sala
+     * @param columna número de la columna del laberinto en la que se encuentra la sala
      */
     public Sala(String descripcion, int max_items, int max_monstruos, int maxTrampasPorSala, int fila, int columna) {
         this.descripcion=descripcion;
@@ -31,15 +31,23 @@ public class Sala {
     }
 
     /**
-     * Método agregarItem para incluir items en la sala
-     * TODO comprobar si existe el objeto en la sala o si la lista de items no está ya llena en caso afirmativo
+     * Método agregarItem para incluir items en la sala.
+     *  Comprobar si existe el objeto en la sala o si la lista de items no está ya llena en caso afirmativo
      *  devolver false. En caso de no existir incluirlo en la lista y devolver true
-     * @param item
-     * @return
+     * @param item objeto que se busca introducir a la lista de items
+     * @return resul - éxito de la operación
      */
     public boolean agregarItem(Item item) {
 
-            return
+        int pos=0;
+        boolean llena=true, unico=true, resul=false;
+        for(int i=0;i<items.length;i++){
+            if(items[i]==null){llena=false;pos=i;}
+            else if(items[i].equals(item))unico=false;
+        }
+        if(!llena&&unico){items[pos]=item;resul=true;}
+
+            return resul;
     }
 
     /**
