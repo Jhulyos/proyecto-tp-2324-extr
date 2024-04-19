@@ -54,13 +54,13 @@ public class Monstruo {
     }
 
     /**
-     * Método recibirDanyo para calcular la vida restante
-     * TODO actualizar la vida restante del monstruo despues de un ataque, siempre que el
+     * Método recibirDanyo para calcular la vida restante.
+     * Actualizar la vida restante del monstruo después de un ataque, siempre que el
      * valor de ataque sea positivo
      * @param ataque tipo int indica el daño recibido
      */
     public void recibirDanyo(int ataque) {
-        if(ataque>=0)vida-=ataque; //Y si es negativo?
+        if(ataque>=0)vida-=ataque;
     }
 
     /**

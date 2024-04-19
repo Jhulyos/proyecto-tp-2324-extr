@@ -148,12 +148,21 @@ public class Sala {
     }
 
     /**
-     * Método eliminarMonstruo para eliminar un monstruo de la lista segun un nombre dado
-     * TODO buscar en la lista el monstruo segun el nombre pasado como parámetro y eliminarlo.
-     * @param nombreMonstruo
+     * Método eliminarMonstruo para eliminar un monstruo de la lista segun un nombre dado.
+     * Buscar en la lista el monstruo segun el nombre pasado como parámetro y eliminarlo.
+     * @param nombreMonstruo String que contiene el nombre del monstruo a eliminar
      */
     public void eliminarMonstruo(String nombreMonstruo) { //Mover elementos del array al eliminar elementos
         Monstruo montruo=buscarMonstruo(nombreMonstruo);
+        int i=0;
+        do{
+            if(montruo.equals(monstruos[i])){
+                for(int j=i;j<monstruos.length;j++){
+                    if(j<monstruos.length-1)monstruos[j]=monstruos[j+1];
+                    else monstruos[j]=null;
+                }
+            }
+        }while(!montruo.equals(monstruos[i]));
     }
 
     /**
@@ -268,11 +277,20 @@ public class Sala {
     }
 
     /**
-     * Método eliminarItem para eliminar un item con la descripcion pasada como parámetro
-     * TODO buscar el item que coincida con la descripción pasada por parámetro y eliminarlo de la lista de items
-     * @param descripcion
+     * Método eliminarItem para eliminar un item con la descripción pasada como parámetro.
+     * Buscar el item que coincida con la descripción pasada por parámetro y eliminarlo de la lista de items
+     * @param descripcion String que contiene la descripción del item a eliminar
      */
     public void eliminarItem(String descripcion) { //Mover elementos del array al eliminar elementos
-
+        Item item=buscarItem(descripcion);
+        int i=0;
+        do{
+            if(item.equals(items[i])){
+                for(int j=i;j<items.length;j++){
+                    if(j<monstruos.length-1)items[j]=items[j+1];
+                    else items[j]=null;
+                }
+            }
+        }while(!item.equals(items[i]));
     }
 }
