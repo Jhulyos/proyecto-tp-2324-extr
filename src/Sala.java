@@ -142,6 +142,7 @@ public class Sala {
      * Mostrar por pantalla la info de los monstruos utilizando los métodos implementados en la clase "monstruo"
      */
     private void listarMonstruos() {
+        System.out.println("Monstruos en la sala:");
         for(Monstruo monstruo : monstruos){
             System.out.println(monstruo.toString());
         }

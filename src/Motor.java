@@ -154,7 +154,7 @@ public class Motor {
      * @return
      */
     public Sala getSala(int fila, int columna) {
-        return
+        return mapa[fila][columna];
     }
 
     /**
@@ -162,12 +162,39 @@ public class Motor {
      * TODO construir un String con la información contenida en el mapa
      *  respetando el formato que aparece en la memoria de la práctica
      *
-     * @param fila
-     * @param columna
+     * @param fila    de la sala actual
+     * @param columna de la sala actual
      * @return
      */
     public String mostrarMapa(int fila, int columna) {
-        return
+        int numFilas = mapa.length, numColumnas = mapa[0].length;
+        String[][] mapaString = new String[numFilas + 2][numColumnas + 2];
+        //Bordes y esquinas
+        mapaString[0][0] = "╔";
+        mapaString[0][numColumnas + 1] = "╗";
+        mapaString[numFilas + 1][0] = "╚";
+        mapaString[numFilas + 1][numColumnas + 1] = "╝";
+        for (int i = 1; i < numColumnas + 1; i++) {
+            mapaString[0][i] = "═";
+            mapaString[numFilas + 1][i] = "═";
+        }
+        for (int i = 1; i < numFilas + 1; i++) {
+            mapaString[i][0] = "║";
+            mapaString[i][numColumnas + 1] = "║";
+        }
+        //Contenido del mapa
+        mapaString[fila + 1][columna + 1] = "@";
+        for (int i = 0; i < numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                if (mapa[i][j] != null) mapaString[i + 1][j + 1] = "░";
+            }
+        }
+        StringBuilder resul = new StringBuilder();
+        for (int i = 0; i < numFilas + 2; i++) {
+            for (int j = 0; j < numColumnas + 2; j++) resul.append(mapaString[i][j]);
+            resul.append("\n");
+        }
+        return resul.toString();
     }
 
     /**
@@ -192,8 +219,27 @@ public class Motor {
      * @param random
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
-        System.out.println(mostrarMapa(mapa.length, mapa[0].length));
-        personaje.
+        System.out.println(mostrarMapa(personaje.getFila(), personaje.getColumna()));
+        Sala salaActual = getSala(personaje.getFila(), personaje.getColumna());
+        while (personaje.getVida() > 0 && !salaActual.getDescripcion().equals("Habitación de salida")) {
+            System.out.println(salaActual.getDescripcion());
+            while (salaActual.hayMonstruos() && personaje.getVida() > 0) {
+                Monstruo monstruoSelec = salaActual.seleccionarMonstruo(teclado);
+                while (monstruoSelec.getVida() > 0 && personaje.getVida() > 0) {
+                    System.out.println(personaje.toString() + "ataca a " + monstruoSelec.toString() + " con " +
+                            personaje.getAtaque() + " puntos de daño");
+                    monstruoSelec.recibirDanyo(personaje.getAtaque() - monstruoSelec.getDefensa());
+                    if (monstruoSelec.getVida() > 0) {
+                        System.out.println(monstruoSelec.toString() + "ataca a " + personaje.toString() + " con " +
+                                monstruoSelec.getAtaque() + " puntos de daño");
+                        personaje.recibirDanyo(monstruoSelec.getAtaque() - personaje.getDefensa());
+                    }
+                }
+                if (monstruoSelec.getVida() <= 0) System.out.println("¡Has derrotado al monstruo!");
+                else System.out.println("El monstruo te ha matado. El valor total de tus ítems es " +
+                        personaje.getValorMochila());
+            }
+        }
     }
 
     /**
@@ -208,48 +254,48 @@ public class Motor {
      * @return
      */
     public Sala seleccionarMovimiento(Scanner teclado, Sala salaActual) {
-        int filaPropuesta=salaActual.getFila(), columnaPropuesta=salaActual.getColumna();
+        int filaPropuesta = salaActual.getFila(), columnaPropuesta = salaActual.getColumna();
         do {
-            mostrarMapa(salaActual.getFila(),salaActual.getColumna());
+            mostrarMapa(salaActual.getFila(), salaActual.getColumna());
             System.out.println();
             switch (Utilidades.leerCadena(teclado, "Introduce el movimiento (N, E, S, O): ")) {
                 case "N":
                     if (!existeEnMapa(salaActual.getFila() - 1, salaActual.getColumna())) {
                         System.out.println("No puedes moverte al norte.");
-                    }else {
+                    } else {
                         filaPropuesta = salaActual.getFila() - 1;
                         columnaPropuesta = salaActual.getColumna();
                     }
                     break;
                 case "E":
-                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna()+1)) {
+                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() + 1)) {
                         System.out.println("No puedes moverte al norte.");
-                    }else {
+                    } else {
                         filaPropuesta = salaActual.getFila();
-                        columnaPropuesta = salaActual.getColumna()+1;
+                        columnaPropuesta = salaActual.getColumna() + 1;
                     }
                     break;
                 case "S":
                     if (!existeEnMapa(salaActual.getFila() + 1, salaActual.getColumna())) {
                         System.out.println("No puedes moverte al norte.");
-                    }else {
+                    } else {
                         filaPropuesta = salaActual.getFila() + 1;
                         columnaPropuesta = salaActual.getColumna();
                     }
                     break;
                 case "O":
-                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna()+1)) {
+                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() + 1)) {
                         System.out.println("No puedes moverte al norte.");
-                    }else {
+                    } else {
                         filaPropuesta = salaActual.getFila();
-                        columnaPropuesta = salaActual.getColumna()-1;
+                        columnaPropuesta = salaActual.getColumna() - 1;
                     }
                     break;
                 default:
                     System.out.println("No existe ese movimiento, introduzca uno válido.");
             }
-        }while ((filaPropuesta == salaActual.getFila()) && (columnaPropuesta == salaActual.getColumna()));
-        return mapa[filaPropuesta][columnaPropuesta];
+        } while ((filaPropuesta == salaActual.getFila()) && (columnaPropuesta == salaActual.getColumna()));
+        return getSala(filaPropuesta, columnaPropuesta);
     }
 
     private boolean existeEnMapa(int fila, int columna) {
