@@ -14,72 +14,129 @@ public class Motor {
 
     /**
      * Constructor Clase Motor
-     * @param filas
-     * @param columnas
-     * @param maxItemsPorSala
-     * @param maxMonstruosPorSala
-     * @param maxTrampasPorSalas
+     * @param filas filas
+     * @param columnas columnas
+     * @param maxItemsPorSala máx número de items por sala
+     * @param maxMonstruosPorSala máx número de monstruos por sala
+     * @param maxTrampasPorSalas máx número de trampas por sala
      */
     public Motor(int filas, int columnas, int maxItemsPorSala, int maxMonstruosPorSala, int maxTrampasPorSalas) {
     this.maxItemsPorSala=maxItemsPorSala;
     this.maxMonstruosPorSala=maxMonstruosPorSala;
     this.maxTrampasPorSala=maxTrampasPorSalas;
-    this.mapa=
+    this.mapa=new Sala[filas][columnas];
     }
 
     /**
-     * Clase cargarMapa para construir la matriz de mapa a traves del fichero
-     * TODO leer los datos del fichero de mapa pasado por parametro y generar una matriz Sala[][]
+     * Clase cargarMapa para construir la matriz de mapa a traves del fichero.
+     * Leer los datos del fichero de mapa pasado por parametro y generar una matriz Sala[][]
      *  con dimension Sala[fila][columna] e inicializar la sala con los valores con la descripción del fichero
      *  y los parámetros de maxItemsPorSala, maxMonstruosPorSala, maxTrampasPorSala.
-     * @param ficheroMapa
+     * @param ficheroMapa del que se lee para crear la matriz de salas
      * @return sala generada
      */
-    Sala[][] cargarMapa(String ficheroMapa) {
-
-        return
+    Sala[][] cargarMapa(String ficheroMapa) { //Revisar si funciona, y si hay que utilizar mapa en lugar de crear otro Sala [][]
+        Scanner sc=null;
+        Sala [][] sala=mapa;
+        try{
+            sc=new Scanner(new FileReader(ficheroMapa));
+            while(sc.hasNextLine()){
+                String [] linea=sc.nextLine().split(";");
+                sala[Integer.parseInt(linea[0])][Integer.parseInt(linea[1])]=new Sala(linea[2],maxItemsPorSala,
+                        maxMonstruosPorSala,maxTrampasPorSala,Integer.parseInt(linea[0]),Integer.parseInt(linea[1]));
+            }
+        }catch (Exception e){
+            return null;
+        }finally {
+            if(sc!=null){
+                sc.close();
+            }
+        }
+        return sala;
     }
 
     /**
      * Metodo cargarItems para agregar los items del fichero en el mapa
-     * TODO Método para leer un fichero de items pasado por parámetro y según
+     * Método para leer un fichero de items pasado por parámetro y según
      *  la fila y columna introducir el item en la sala.
-     * @param ficheroItems
+     * @param ficheroItems del que se lee para asignar items a salas
      */
     private void cargarItems(String ficheroItems) {
-
+        Scanner sc=null;
+        try{
+            sc=new Scanner(new FileReader(ficheroItems));
+            while(sc.hasNextLine()){
+                String [] linea=sc.nextLine().split(";");
+                mapa[Integer.parseInt(linea[0])][Integer.parseInt(linea[1])].agregarItem(new Item(linea[2],
+                        Double.parseDouble(linea[3]),Double.parseDouble(linea[4])));
+            }
+        }catch (Exception e){
+        }finally {
+            if(sc!=null){
+                sc.close();
+            }
+        }
     }
 
     /**
      * Método cargarMonstruos para agregar los monstruos del fichero en el mapa
-     * TODO Método para leer un fichero de Monstruos pasado por parámetro y según
+     * Método para leer un fichero de Monstruos pasado por parámetro y según
      *  la fila y columna introducir el monstruo en la sala.
-     * @param ficheroMonstruos
+     * @param ficheroMonstruos que leemos para introducir monstruos en la sala
      */
     private void cargarMonstruos(String ficheroMonstruos) {
-
+        Scanner sc=null;
+        try{
+            sc=new Scanner(new FileReader(ficheroMonstruos));
+            while(sc.hasNextLine()){
+                String [] linea=sc.nextLine().split(";");
+                mapa[Integer.parseInt(linea[0])][Integer.parseInt(linea[1])].agregarMonstruo(new Monstruo(linea[2],
+                        Integer.parseInt(linea[3]),Integer.parseInt(linea[4]),Integer.parseInt(linea[5])));
+            }
+        }catch (Exception e){
+        }finally {
+            if(sc!=null){
+                sc.close();
+            }
+        }
     }
 
     /**
-     * Método cargarTrampas para agregar las trampas del fichero en el mapa
-     * TODO Método para leer un fichero de trampas pasado por parámetro y según
+     * Método cargarTrampas para agregar las trampas del fichero en el mapa.
+     * Método para leer un fichero de trampas pasado por parámetro y según
      *   la fila y columna introducir la trampa en la sala.
-     * @param ficheroTrampas
+     * @param ficheroTrampas que se lee para introducir trampas a la sala
      */
     private void cargarTrampas(String ficheroTrampas) {
-
+        Scanner sc=null;
+        try{
+            sc=new Scanner(new FileReader(ficheroTrampas));
+            while(sc.hasNextLine()){
+                String [] linea=sc.nextLine().split(";");
+                mapa[Integer.parseInt(linea[0])][Integer.parseInt(linea[1])].agregarTrampa(new Trampa(linea[2],
+                        Integer.parseInt(linea[3])));
+            }
+        }catch (Exception e){
+        }finally {
+            if(sc!=null){
+                sc.close();
+            }
+        }
     }
 
     /**
-     * Metodo iniciar, para preparar el mapa
-     * TODO instanciación del parametro mapa y carga de datos con los ficheros pasados como parámetros
-     * @param ficheroMapa
-     * @param ficheroItems
-     * @param ficheroMonstruos
-     * @param ficheroTrampas
+     * Método iniciar, para preparar el mapa
+     * Instanciación del parámetro mapa y carga de datos con los ficheros pasados como parámetros
+     * @param ficheroMapa que contiene la información de la matriz de salas
+     * @param ficheroItems que contiene los items a introducir
+     * @param ficheroMonstruos que contiene la información de la matriz de salas
+     * @param ficheroTrampas que contiene la información de la matriz de salas
      */
     public void iniciar(String ficheroMapa, String ficheroItems, String ficheroMonstruos, String ficheroTrampas) {
-
+        mapa=cargarMapa(ficheroMapa);
+        cargarItems(ficheroItems);
+        cargarMonstruos(ficheroMonstruos);
+        cargarTrampas(ficheroTrampas);
     }
 
     /**
