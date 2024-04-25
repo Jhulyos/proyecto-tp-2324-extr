@@ -211,9 +211,9 @@ public class Motor {
         int filaPropuesta=salaActual.getFila(), columnaPropuesta=salaActual.getColumna();
         do {
             mostrarMapa(salaActual.getFila(),salaActual.getColumna());
-            System.out.println(Utilidades.leerCadena(teclado, "Introduce el movimiento (N, E, S, O): "));
-            switch (teclado.next().charAt(0)) {
-                case 'N':
+            System.out.println();
+            switch (Utilidades.leerCadena(teclado, "Introduce el movimiento (N, E, S, O): ")) {
+                case "N":
                     if (!existeEnMapa(salaActual.getFila() - 1, salaActual.getColumna())) {
                         System.out.println("No puedes moverte al norte.");
                     }else {
@@ -221,7 +221,7 @@ public class Motor {
                         columnaPropuesta = salaActual.getColumna();
                     }
                     break;
-                case 'E':
+                case "E":
                     if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna()+1)) {
                         System.out.println("No puedes moverte al norte.");
                     }else {
@@ -229,7 +229,7 @@ public class Motor {
                         columnaPropuesta = salaActual.getColumna()+1;
                     }
                     break;
-                case 'S':
+                case "S":
                     if (!existeEnMapa(salaActual.getFila() + 1, salaActual.getColumna())) {
                         System.out.println("No puedes moverte al norte.");
                     }else {
@@ -237,7 +237,7 @@ public class Motor {
                         columnaPropuesta = salaActual.getColumna();
                     }
                     break;
-                case 'O':
+                case "O":
                     if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna()+1)) {
                         System.out.println("No puedes moverte al norte.");
                     }else {
