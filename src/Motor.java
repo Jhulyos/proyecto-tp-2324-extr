@@ -245,6 +245,8 @@ public class Motor {
                         columnaPropuesta = salaActual.getColumna()-1;
                     }
                     break;
+                default:
+                    System.out.println("No existe ese movimiento, introduzca uno válido.");
             }
         }while ((filaPropuesta == salaActual.getFila()) && (columnaPropuesta == salaActual.getColumna()));
         return mapa[filaPropuesta][columnaPropuesta];
