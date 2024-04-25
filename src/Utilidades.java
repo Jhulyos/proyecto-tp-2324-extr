@@ -4,8 +4,8 @@ import java.util.Scanner;
  */
 public class Utilidades {
     /**
-     * Método estático leerCadena para leer un cadena de carecteres por pantalla
-     * TODO leer por pantalla y comprobar que es una cadena de caracteres válida. 
+     * Método estático leerCadena para leer un cadena de carecteres por pantalla.
+     * Leer por pantalla y comprobar que es una cadena de caracteres válida.
      * @param teclado escáner
      * @param s mensaje a mostrar por pantalla
      * @return cadena
@@ -13,15 +13,16 @@ public class Utilidades {
     public static String leerCadena(Scanner teclado, String s) {
         String cadena;
         do{
-            System.out.println(s); //Así se utiliza 's'?
+            System.out.print(s); //Así se utiliza 's'?
             cadena=teclado.nextLine();
+            if(!cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")) System.out.println("No válido");
         }while(cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")); //A esto se refiere con cadena válida?
         return cadena;
     }
 
     /**
-     * Método estático leerNumero para leer un numero pasado por pantalla
-     * TODO leer por pantalla y comprobar que es un número valido. Solicita un número repetidamente hasta que se
+     * Método estático leerNumero para leer un número pasado por pantalla.
+     * Leer por pantalla y comprobar que es un número válido. Solicita un número repetidamente hasta que se
      *  introduzca uno correcto (dentro de los límites)
      * @param teclado escáner
      * @param mensaje a mostrar por pantalla
