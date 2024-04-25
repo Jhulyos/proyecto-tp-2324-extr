@@ -8,7 +8,8 @@ public class Personaje {
     private int vida;
     private final int ataque, defensa, destreza;
     private final Item[] items;
-
+    private int fila;
+    private int columna;
     private final double maxPesoPorPersonaje;
 
     /**
@@ -29,6 +30,8 @@ public class Personaje {
         this.destreza=destreza;
         this.maxPesoPorPersonaje=maxPesoPorPersonaje;
         this.items=new Item[maxItemsPorPersonaje];
+        fila=0;
+        columna=0;
     }
 
 
@@ -119,6 +122,38 @@ public class Personaje {
             item=items[indice];
         }
             return item;
+    }
+
+    /**
+     * Método getFila
+     * @return int fila
+     */
+    public int getFila() {
+        return fila;
+    }
+
+    /**
+     * Método getColumna
+     * @return int columna
+     */
+    public int getColumna() {
+        return columna;
+    }
+
+    /**
+     * Método setFila
+     * @param fila
+     */
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    /**
+     * Método setColumna
+     * @param columna
+     */
+    public void setColumna(int columna) {
+        this.columna = columna;
     }
 
     /**
