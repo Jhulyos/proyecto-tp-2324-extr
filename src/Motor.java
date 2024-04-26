@@ -146,25 +146,25 @@ public class Motor {
     }
 
     /**
-     * Método getSala para obtener una sala concreta del mapa
-     * TODO devolver una Sala concreta del mapa
+     * Método getSala para obtener una sala concreta del mapa.
+     * Devolver una Sala concreta del mapa
      *
-     * @param fila
-     * @param columna
-     * @return
+     * @param fila de la sala solicitada
+     * @param columna de la sala solicitada
+     * @return sala solicitada
      */
     public Sala getSala(int fila, int columna) {
         return mapa[fila][columna];
     }
 
     /**
-     * Método mostrarMapa para transformar el mapa en String
-     * TODO construir un String con la información contenida en el mapa
+     * Método mostrarMapa para transformar el mapa en String.
+     * Construir un String con la información contenida en el mapa
      *  respetando el formato que aparece en la memoria de la práctica
      *
-     * @param fila    de la sala actual
+     * @param fila de la sala actual
      * @param columna de la sala actual
-     * @return
+     * @return el mapa en formato string
      */
     public String mostrarMapa(int fila, int columna) {
         int numFilas = mapa.length, numColumnas = mapa[0].length;
@@ -244,20 +244,19 @@ public class Motor {
 
     /**
      * Metodo seleccionarMovimiento para establecer las acciones que tome el jugador con su personaje
-     * TODO El desplazamiento del personaje se entiende como norte (N), sur (S), este (E) u oeste (O)
+     * El desplazamiento del personaje se entiende como norte (N), sur (S), este (E) u oeste (O)
      *  en este método hay que capturar por pantalla la acción que va a tomar el usuario de entre las posibles
      *  para ello hay que tener en cuenta que se debe avisar al usuario si puede realizar o no la acción.
      *  Se devolverá la sala destino a la que se ha movido el personaje.
      *
-     * @param teclado
-     * @param salaActual
-     * @return
+     * @param teclado esáner
+     * @param salaActual sala en la que se encuentra el jugador antes de realizar el movimiento
+     * @return sala a la que se mueve el personaje
      */
     public Sala seleccionarMovimiento(Scanner teclado, Sala salaActual) {
         int filaPropuesta = salaActual.getFila(), columnaPropuesta = salaActual.getColumna();
         do {
-            mostrarMapa(salaActual.getFila(), salaActual.getColumna());
-            System.out.println();
+            System.out.println(mostrarMapa(salaActual.getFila(), salaActual.getColumna()));
             switch (Utilidades.leerCadena(teclado, "Introduce el movimiento (N, E, S, O): ")) {
                 case "N":
                     if (!existeEnMapa(salaActual.getFila() - 1, salaActual.getColumna())) {
@@ -269,7 +268,7 @@ public class Motor {
                     break;
                 case "E":
                     if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() + 1)) {
-                        System.out.println("No puedes moverte al norte.");
+                        System.out.println("No puedes moverte al este.");
                     } else {
                         filaPropuesta = salaActual.getFila();
                         columnaPropuesta = salaActual.getColumna() + 1;
@@ -277,7 +276,7 @@ public class Motor {
                     break;
                 case "S":
                     if (!existeEnMapa(salaActual.getFila() + 1, salaActual.getColumna())) {
-                        System.out.println("No puedes moverte al norte.");
+                        System.out.println("No puedes moverte al sur.");
                     } else {
                         filaPropuesta = salaActual.getFila() + 1;
                         columnaPropuesta = salaActual.getColumna();
@@ -285,7 +284,7 @@ public class Motor {
                     break;
                 case "O":
                     if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() + 1)) {
-                        System.out.println("No puedes moverte al norte.");
+                        System.out.println("No puedes moverte al oeste.");
                     } else {
                         filaPropuesta = salaActual.getFila();
                         columnaPropuesta = salaActual.getColumna() - 1;
