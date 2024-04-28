@@ -14,9 +14,17 @@ public class Aventuras {
      * TODO instanciación e inicialización de objetos para la ejecución,
      *  ejecución del motor, muestra de puntuaciones y lectura de instrucciones
      *  por teclado para jugar. Finalmente guardar la puntuación
-     * @param args
+     * @param args parámetros de la configuración: filas, columnas, maxItemsPorSala, maxMonstruosPorSala,
+     *             maxTrampasPorSala, fichero_salas, fichero_items, fichero_monstruos, fichero_trampas,
+     *             fichero_puntuaciones
      */
     public static void main(String[] args) {
+        Motor motor=new Motor(Integer.parseInt(args[0]),Integer.parseInt(args[1]),Integer.parseInt(args[2]),
+                Integer.parseInt(args[3]),Integer.parseInt(args[4]));
+        motor.iniciar(args[5],args[6],args[7],args[8]);
+        Scanner teclado=new Scanner(System.in);
+        Personaje personaje=Personaje.crearPersonaje(teclado);
+        motor.jugar(teclado,personaje,new Random());
 
     }
 

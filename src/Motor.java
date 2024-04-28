@@ -183,12 +183,13 @@ public class Motor {
             mapaString[i][numColumnas + 1] = "║";
         }
         //Contenido del mapa
-        mapaString[fila + 1][columna + 1] = "@";
         for (int i = 0; i < numFilas; i++) {
             for (int j = 0; j < numColumnas; j++) {
                 if (mapa[i][j] != null) mapaString[i + 1][j + 1] = "░";
+                else mapaString[i + 1][j + 1] = " ";
             }
         }
+        mapaString[fila + 1][columna + 1] = "@";
         StringBuilder resul = new StringBuilder();
         for (int i = 0; i < numFilas + 2; i++) {
             for (int j = 0; j < numColumnas + 2; j++) resul.append(mapaString[i][j]);
@@ -214,33 +215,77 @@ public class Motor {
      *  6. Por último puede haber items en la sala, en cuyo caso habrá que preguntar al usuario qué ítems quiere guardarse (o NINGUNO para terminar)
      *  ¡IMPORTANTE! se debe mostrar por pantalla avisos para cada opción dando feedback al usuario de todo lo que ocurra (consultar enunciado)
      *
-     * @param teclado
-     * @param personaje
-     * @param random
+     * @param teclado escáner
+     * @param personaje jugador
+     * @param random objeto de la clase Random para el funcionamiento de trampas
      */
     public void jugar(Scanner teclado, Personaje personaje, Random random) {
+        //1.Mostrar mapa
         System.out.println(mostrarMapa(personaje.getFila(), personaje.getColumna()));
+        //2.Obtener sala actual
         Sala salaActual = getSala(personaje.getFila(), personaje.getColumna());
         while (personaje.getVida() > 0 && !salaActual.getDescripcion().equals("Habitación de salida")) {
+            //3.Descripción de la sala actual
             System.out.println(salaActual.getDescripcion());
+            //4.Comprobar monstruos, entrar en combate
             while (salaActual.hayMonstruos() && personaje.getVida() > 0) {
                 Monstruo monstruoSelec = salaActual.seleccionarMonstruo(teclado);
+                //4.a Comprobar vidas
                 while (monstruoSelec.getVida() > 0 && personaje.getVida() > 0) {
-                    System.out.println(personaje.toString() + "ataca a " + monstruoSelec.toString() + " con " +
+                    //4.b Personaje ataca
+                    System.out.println(personaje.toString() + " ataca a " + monstruoSelec.toString() + " con " +
                             personaje.getAtaque() + " puntos de daño");
                     monstruoSelec.recibirDanyo(personaje.getAtaque() - monstruoSelec.getDefensa());
+                    //4.c Monstuo ataca
                     if (monstruoSelec.getVida() > 0) {
                         System.out.println(monstruoSelec.toString() + "ataca a " + personaje.toString() + " con " +
                                 monstruoSelec.getAtaque() + " puntos de daño");
                         personaje.recibirDanyo(monstruoSelec.getAtaque() - personaje.getDefensa());
                     }
                 }
-                if (monstruoSelec.getVida() <= 0) System.out.println("¡Has derrotado al monstruo!");
-                else System.out.println("El monstruo te ha matado. El valor total de tus ítems es " +
-                        personaje.getValorMochila());
+
+                if (monstruoSelec.getVida() > 0) {
+                    System.out.println("El monstruo te ha matado. El valor total de tus ítems es " +
+                            personaje.getValorMochila());
+                } else {
+                    System.out.println("¡Has derrotado al monstruo!");
+                    salaActual.eliminarMonstruo(monstruoSelec.getNombre());
+                }
             }
+            //5. Hay trampas:
+            if (personaje.getVida() > 0 && salaActual.hayTrampas()) {
+                for (Trampa trampas : salaActual.getTrampas()) {
+                    if (personaje.getVida() > 0) {
+                        //5.a El personaje esquiva la trampa
+                        if (personaje.getDestreza() > (random.nextInt(50) + 1)) {
+                            System.out.println("¡Has esquivado la trampa!");
+                        }
+                        //5.b El personaje NO esquiva la trampa
+                        else {
+                            personaje.recibirDanyo(trampas.getDanyo());
+                            System.out.println("¡Has caído en una trampa!" + trampas.getDescripcion() + "\nTe ha hecho " +
+                                    trampas.getDanyo() + " puntos de daño.");
+                        }
+                    } else System.out.println("La trampa te ha matado. El valor total de tus ítems es " +
+                            personaje.getValorMochila());
+                }
+            }
+            //6. Items
+            if (salaActual.hayItems()) {
+                Item itemSelec = salaActual.seleccionarItem(teclado);
+                if (!personaje.anyadirItem(itemSelec)) {
+                    System.out.println("¡" + itemSelec.getDescripcion() + " pesa demasiado!");
+                } else {
+                    System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
+                    System.out.println(personaje.infoMochila());
+                }
+            }
+            salaActual=seleccionarMovimiento(teclado,salaActual);
+            personaje.setFila(salaActual.getFila());
+            personaje.setColumna(salaActual.getColumna());
         }
     }
+
 
     /**
      * Metodo seleccionarMovimiento para establecer las acciones que tome el jugador con su personaje

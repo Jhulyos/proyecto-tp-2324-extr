@@ -142,7 +142,7 @@ public class Personaje {
 
     /**
      * Método setFila
-     * @param fila
+     * @param fila que se asigna
      */
     public void setFila(int fila) {
         this.fila = fila;
@@ -150,7 +150,7 @@ public class Personaje {
 
     /**
      * Método setColumna
-     * @param columna
+     * @param columna que se asigna
      */
     public void setColumna(int columna) {
         this.columna = columna;
@@ -166,16 +166,24 @@ public class Personaje {
     }
 
     /**
-     * Método anyadirItem para incluir un item en la mochila del personaje
-     * TODO Comprobar si el item es válido y si el peso max del personaje no se supera para poder incluir el item,
+     * Método anyadirItem para incluir un item en la mochila del personaje.
+     * Comprobar si el item es válido y si el peso max del personaje no se supera para poder incluir el item,
      *  en caso negativo devolver false, en caso de que se pueda incluir, añadir el item a la lista de items del
      *  personaje y devolver true
-     * @param item
-     * @return
+     * @param item pasado por parámetro
+     * @return boolean del éxito de la operación
      */
     public boolean anyadirItem(Item item) {
-
-            return
+        boolean resul=false;
+        if(item.valido()&&maxPesoPorPersonaje>(getPesoMochila()+item.getPeso())){
+            int i=0;
+            do{
+                if(items[i]==null){items[i]=item;resul=true;}
+                i++;
+            }while(i<items.length&&!resul);
+            if(!resul)System.out.println("La mochila esta llena");
+        }
+        return resul;
     }
 
     /**
@@ -186,7 +194,7 @@ public class Personaje {
      */
     @Override
     public String toString() {
-        return "{ "+nombre+" (V: "+vida+", A: "+ataque+", D: "+defensa+"X: "+destreza+") }";
+        return "{ "+nombre+" (V: "+vida+", A: "+ataque+", D: "+defensa+", X: "+destreza+") }";
     }
     /**
      * Método getPesoMochila para obtener el peso total que carga en la mochila el personaje.
@@ -225,7 +233,7 @@ public class Personaje {
      * @return mochila más el peso y valor totales
      */
     public String infoMochila() { //revisar si funciona correctamente
-        String mochila="Mochila de Edgar:\n";
+        String mochila="Mochila de "+this.nombre+":\n";
         double peso=0,valor=0;
         for (Item item : items){
             mochila.concat(item.toString()+"\n");

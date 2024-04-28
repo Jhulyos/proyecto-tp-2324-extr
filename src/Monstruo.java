@@ -81,9 +81,13 @@ public class Monstruo {
      * @param obj pasado por parámetro se compara con los atributos de la clase
      * @return True en caso de ser igual, false en otro caso
      */
-    @Override
+    @Override//Cuando la propia clase es null da error
     public boolean equals(Object obj) {
-        Monstruo monstruo = (Monstruo) obj;
-        return (this.nombre.equals(monstruo.getNombre()) && this.vida==monstruo.getVida() && this.ataque== monstruo.getAtaque() && this.defensa== monstruo.getDefensa());
+        boolean resul=false;
+        if(obj instanceof Monstruo monstruo){
+            resul=this.nombre.equals(monstruo.getNombre()) && this.vida == monstruo.getVida() &&
+                    this.ataque == monstruo.getAtaque() && this.defensa == monstruo.getDefensa();
+        }
+        return resul;
     }
 }
