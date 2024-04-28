@@ -64,10 +64,15 @@ public class Item {
      */
     @Override
     public boolean equals(Object obj) {
-        Item item = (Item) obj;
-        return (this.descripcion.equals(item.getDescripcion()) && this.valor==item.getValor() && this.peso==item.getPeso());
+        boolean resul=false;
+        if(obj instanceof Item item){
+            resul=this.descripcion.equals(item.getDescripcion()) && this.valor==item.getValor() && this.peso==item.getPeso());
+        }
+        return resul;
     }
+
     public boolean valido(){
         return (!descripcion.isBlank()&&valor>0&&peso>0);
     }
+
 }

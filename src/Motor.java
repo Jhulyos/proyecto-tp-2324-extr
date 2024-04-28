@@ -227,7 +227,7 @@ public class Motor {
         while (personaje.getVida() > 0 && !salaActual.getDescripcion().equals("Habitación de salida")) {
             //3.Descripción de la sala actual
             System.out.println(salaActual.getDescripcion());
-            //4.Comprobar monstruos, entrar en combate
+            //4. Comprobar monstruos, entrar en combate
             while (salaActual.hayMonstruos() && personaje.getVida() > 0) {
                 Monstruo monstruoSelec = salaActual.seleccionarMonstruo(teclado);
                 //4.a Comprobar vidas
