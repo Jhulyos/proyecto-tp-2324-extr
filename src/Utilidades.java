@@ -16,7 +16,7 @@ public class Utilidades {
             System.out.print(s); //Así se utiliza 's'?
             cadena=teclado.nextLine();
             if(!cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")) System.out.println("No válido");
-        }while(cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")); //A esto se refiere con cadena válida?
+        }while(!cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")); //A esto se refiere con cadena válida?
         return cadena;
     }
 
@@ -32,13 +32,15 @@ public class Utilidades {
      */
     // Solicita un número repetidamente hasta que se introduzca uno correcto (dentro de los límites)
     public static int leerNumero(Scanner teclado, String mensaje, int minimo, int maximo) {
-        int num;
+        String num;
         do{
-            System.out.println(mensaje);
-            num= teclado.nextInt();
-            if(num<minimo||num>maximo) System.out.println("Valor fuera del rango");
-        }while(num<minimo||num>maximo);
+            System.out.print(mensaje);
+            num = teclado.nextLine();
+            if(num.matches("[0-9]+")){
+                if(Integer.parseInt(num)<minimo||Integer.parseInt(num)>maximo) System.out.println("Valor fuera del rango");
+            }else System.out.println("Debe intoducir un número");
+        }while (!num.matches("[0-9]+")||(Integer.parseInt(num)<minimo||Integer.parseInt(num)>maximo));
 
-        return num;
+        return Integer.parseInt(num);
     }
 }

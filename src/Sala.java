@@ -38,7 +38,6 @@ public class Sala {
      * @return resul - éxito de la operación
      */
     public boolean agregarItem(Item item) {
-
         int pos=0;
         boolean llena=true, unico=true, resul=false;
         for(int i=0;i<items.length;i++){
@@ -58,11 +57,12 @@ public class Sala {
      * @return resul - éxito de la operación
      */
     public boolean agregarMonstruo(Monstruo monstruo) {
-        int pos=0;
+        int pos=-1;
         boolean llena=true, unico=true, resul=false;
         for(int i=0;i<monstruos.length;i++){
-            if(monstruos[i]==null){llena=false;pos=i;}
-            else if(monstruos[i].equals(monstruo))unico=false;
+            if(monstruos[i]==null&&llena){llena=false;pos=i;
+            }
+            else if(monstruos[i]!=null && monstruos[i].equals(monstruo))unico=false;
         }
         if(!llena&&unico){monstruos[pos]=monstruo;resul=true;}
 
@@ -144,7 +144,7 @@ public class Sala {
     private void listarMonstruos() {
         System.out.println("Monstruos en la sala:");
         for(Monstruo monstruo : monstruos){
-            System.out.println(monstruo.toString());
+            if(monstruo!=null)System.out.println(monstruo.toString());
         }
     }
 
@@ -163,7 +163,8 @@ public class Sala {
                     else monstruos[j]=null;
                 }
             }
-        }while(!montruo.equals(monstruos[i]));
+            i++;
+        }while(i<monstruos.length&&!montruo.equals(monstruos[i]));
     }
 
     /**
@@ -208,7 +209,7 @@ public class Sala {
         do{
             if (items[i]!=null)resul=true;
             i++;
-        }while(i<items.length && items[i]==null);
+        }while(i<items.length && !resul);
         return resul;
     }
 
@@ -221,11 +222,13 @@ public class Sala {
      */
     public Item buscarItem(String descripcion) {
         Item item=null;
-        int i=0;
-        do{
-            if(items[i].getDescripcion().equals(descripcion))item=items[i];
-            i++;
-        }while(i< items.length && item==null);
+        if(!descripcion.equals("NINGUNO")) {
+            int i = 0;
+            do {
+                if (items[i].getDescripcion().equals(descripcion)) item = items[i];
+                i++;
+            } while (i < items.length && item == null);
+        }
         return item;
     }
 
@@ -273,7 +276,7 @@ public class Sala {
      */
     private void listarItems() {
         for(Item item : items){
-            System.out.println(item.toString());
+            if(item!=null)System.out.println(item.toString());
         }
     }
 

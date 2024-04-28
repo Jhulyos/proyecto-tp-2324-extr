@@ -52,7 +52,7 @@ public class Item {
      */
     @Override
     public String toString() {
-        return this.descripcion+" (Peso: "+this.peso+", Valor: "+this.valor+")";
+        return "| "+this.descripcion+" (Peso: "+this.peso+", Valor: "+this.valor+") |";
     }
 
     /**
@@ -66,5 +66,8 @@ public class Item {
     public boolean equals(Object obj) {
         Item item = (Item) obj;
         return (this.descripcion.equals(item.getDescripcion()) && this.valor==item.getValor() && this.peso==item.getPeso());
+    }
+    public boolean valido(){
+        return (!descripcion.isBlank()&&valor>0&&peso>0);
     }
 }
