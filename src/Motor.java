@@ -271,7 +271,7 @@ public class Motor {
                 }
             }
             //6. Items
-            if (salaActual.hayItems()) {
+            if (salaActual.hayItems()) { //Falta hacer un bucle
                 Item itemSelec = salaActual.seleccionarItem(teclado);
                 if (!itemSelec.getDescripcion().equals("NINGUNO")){
                     if (personaje.anyadirItem(itemSelec)) {
