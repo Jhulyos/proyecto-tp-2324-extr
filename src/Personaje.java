@@ -233,11 +233,11 @@ public class Personaje {
      * @return mochila más el peso y valor totales
      */
     public String infoMochila() { //revisar si funciona correctamente
-        String mochila="Mochila de "+this.nombre+":\n";
+        StringBuilder mochila= new StringBuilder("Mochila de " + this.nombre + ":\n");
         double peso=0,valor=0;
         for (Item item : items){
             if(item!=null){
-                mochila+=(item.toString()+"\n");
+                mochila.append(item.toString()).append("\n");
                 peso+=item.getPeso();
                 valor+=item.getValor();
             }
