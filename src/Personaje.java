@@ -175,7 +175,7 @@ public class Personaje {
      */
     public boolean anyadirItem(Item item) {
         boolean resul=false;
-        if(item.valido()&&maxPesoPorPersonaje>(getPesoMochila()+item.getPeso())){
+        if(item!=null&&item.valido()&&maxPesoPorPersonaje>(getPesoMochila()+item.getPeso())){
             int i=0;
             do{
                 if(items[i]==null){items[i]=item;resul=true;}

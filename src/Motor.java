@@ -274,7 +274,7 @@ public class Motor {
             if (salaActual.hayItems()) {
                 Item itemSelec = salaActual.seleccionarItem(teclado);
                 if (!personaje.anyadirItem(itemSelec)) {
-                    System.out.println("¡" + itemSelec.getDescripcion() + " pesa demasiado!");
+                    System.out.println("¡" /*+ itemSelec.getDescripcion()*/ + " pesa demasiado!");
                 } else {
                     System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
                     System.out.println(personaje.infoMochila());
@@ -284,6 +284,7 @@ public class Motor {
             personaje.setFila(salaActual.getFila());
             personaje.setColumna(salaActual.getColumna());
         }
+        System.out.println("¡Has completado el laberinto!");
     }
 
 
