@@ -237,7 +237,7 @@ public class Personaje {
         double peso=0,valor=0;
         for (Item item : items){
             if(item!=null){
-                mochila.concat(item.toString()+"\n");
+                mochila+=(item.toString()+"\n");
                 peso+=item.getPeso();
                 valor+=item.getValor();
             }
