@@ -273,11 +273,11 @@ public class Motor {
             //6. Items
             if (salaActual.hayItems()) {
                 Item itemSelec = salaActual.seleccionarItem(teclado);
-                if (!personaje.anyadirItem(itemSelec)) {
-                    System.out.println("¡" /*+ itemSelec.getDescripcion()*/ + " pesa demasiado!");
-                } else {
-                    System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
-                    System.out.println(personaje.infoMochila());
+                if (!itemSelec.getDescripcion().equals("NINGUNO")){
+                    if (personaje.anyadirItem(itemSelec)) {
+                        System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
+                        System.out.println(personaje.infoMochila());
+                    }
                 }
             }
             salaActual=seleccionarMovimiento(teclado,salaActual);

@@ -178,10 +178,13 @@ public class Personaje {
         if(item!=null&&item.valido()&&maxPesoPorPersonaje>(getPesoMochila()+item.getPeso())){
             int i=0;
             do{
-                if(items[i]==null){items[i]=item;resul=true;}
-                i++;
+                if(items[i]==null){resul=true;}
+                else i++;
             }while(i<items.length&&!resul);
             if(!resul)System.out.println("La mochila esta llena");
+            else items[i]=item;
+        }else if (item!=null && item.valido()){
+            System.out.println("¡" + item.getDescripcion() + " pesa demasiado!");
         }
         return resul;
     }
