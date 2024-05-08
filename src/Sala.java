@@ -225,7 +225,7 @@ public class Sala {
         if(!descripcion.equals("NINGUNO")) {
             int i = 0;
             do {
-                if (items[i].getDescripcion().equals(descripcion)) item = items[i];
+                if (items[i]!=null&&items[i].getDescripcion().equals(descripcion)) item = items[i];
                 i++;
             } while (i < items.length && item == null);
         }

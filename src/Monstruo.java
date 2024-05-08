@@ -84,7 +84,8 @@ public class Monstruo {
     @Override//Cuando la propia clase es null da error
     public boolean equals(Object obj) {
         boolean resul=false;
-        if(obj instanceof Monstruo monstruo){
+        if(obj instanceof Monstruo){
+            Monstruo monstruo=(Monstruo)obj;
             resul=this.nombre.equals(monstruo.getNombre()) && this.vida == monstruo.getVida() &&
                     this.ataque == monstruo.getAtaque() && this.defensa == monstruo.getDefensa();
         }

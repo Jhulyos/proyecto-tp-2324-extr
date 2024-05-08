@@ -32,7 +32,7 @@ public class Aventuras {
      * Metodo guardarPuntuación en fichero
      * TODO abrir y guardar en el fichero pasado como parametro el personaje
      *  siguiendo el formato descrito en la memoria de la práctica
-     * @param ficheroPuntuaciones
+     * @param ficheroPuntuaciones fichero en el que se guardarán las puntuaciones
      * @param jugador
      */
     private static void guardarPuntuacion(String ficheroPuntuaciones, Personaje jugador) {

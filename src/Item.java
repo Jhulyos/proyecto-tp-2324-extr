@@ -65,7 +65,8 @@ public class Item {
     @Override
     public boolean equals(Object obj) {
         boolean resul=false;
-        if(obj instanceof Item item){
+        if(obj instanceof Item){
+            Item item=(Item)obj;
             resul=this.descripcion.equals(item.getDescripcion()) && this.valor==item.getValor() && this.peso==item.getPeso();
         }
         return resul;

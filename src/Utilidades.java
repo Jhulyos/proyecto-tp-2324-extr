@@ -15,8 +15,8 @@ public class Utilidades {
         do{
             System.out.print(s); //Así se utiliza 's'?
             cadena=teclado.nextLine();
-            if(!cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")) System.out.println("No válido");
-        }while(!cadena.matches("^[A-Za-z0-9]+([._]?[a-zA-Z0-9]+)*$")); //A esto se refiere con cadena válida?
+            if(!cadena.matches("^[A-Za-zÁ-ÿ0-9]+([._ ]?[a-zA-ZÁ-ÿ0-9]+)*$")) System.out.println("No válido");
+        }while(!cadena.matches("^[A-Za-zÁ-ÿ0-9]+([._ ]?[a-zA-ZÁ-ÿ0-9]+)*$")); //A esto se refiere con cadena válida?
         return cadena;
     }
 

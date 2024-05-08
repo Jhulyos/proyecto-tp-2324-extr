@@ -204,7 +204,7 @@ public class Personaje {
     public double getPesoMochila() {
         double peso=0;
         for (Item item : items) {
-            peso += item.getPeso();
+            if(item!=null)peso += item.getPeso();
         }
         return peso;
     }
@@ -236,9 +236,11 @@ public class Personaje {
         String mochila="Mochila de "+this.nombre+":\n";
         double peso=0,valor=0;
         for (Item item : items){
-            mochila.concat(item.toString()+"\n");
-            peso+=item.getPeso();
-            valor+=item.getValor();
+            if(item!=null){
+                mochila.concat(item.toString()+"\n");
+                peso+=item.getPeso();
+                valor+=item.getValor();
+            }
         }
 
         return mochila+"Peso total: "+peso+" Kg\nTu mochila vale "+valor+" monedas";
