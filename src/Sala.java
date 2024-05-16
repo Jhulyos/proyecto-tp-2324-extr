@@ -155,15 +155,15 @@ public class Sala {
      */
     public void eliminarMonstruo(String nombreMonstruo) { //Mover elementos del array al eliminar elementos
         Monstruo montruo=buscarMonstruo(nombreMonstruo);
-        int i=0;
+        int i=-1;
         do{
-            if(montruo.equals(monstruos[i])){
+            i++;
+            if(i<monstruos.length&&montruo.equals(monstruos[i])){
                 for(int j=i;j<monstruos.length;j++){
                     if(j<monstruos.length-1)monstruos[j]=monstruos[j+1];
                     else monstruos[j]=null;
                 }
             }
-            i++;
         }while(i<monstruos.length&&!montruo.equals(monstruos[i]));
     }
 
