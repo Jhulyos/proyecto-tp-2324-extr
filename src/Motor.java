@@ -276,14 +276,15 @@ public class Motor {
                 }
             }
             //6. Items
-            if (salaActual.hayItems()) { //Falta hacer un bucle
-                Item itemSelec=null;
+            Item itemSelec=null;
+            while (salaActual.hayItems()||(itemSelec!=null&&!itemSelec.getDescripcion().equals("NINGUNO"))) { //Falta hacer un bucle
                 do{
                     itemSelec = salaActual.seleccionarItem(teclado);
                 }while(itemSelec==null);
                 if (!itemSelec.getDescripcion().equals("NINGUNO")){
                     if (personaje.anyadirItem(itemSelec)) {
                         System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
+                        salaActual.eliminarItem(itemSelec.getDescripcion());
                         System.out.println(personaje.infoMochila());
                     }
                 }

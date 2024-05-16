@@ -292,10 +292,11 @@ public class Sala {
         do{
             if(item.equals(items[i])){
                 for(int j=i;j<items.length;j++){
-                    if(j<monstruos.length-1)items[j]=items[j+1];
+                    if(j<items.length-1)items[j]=items[j+1];
                     else items[j]=null;
                 }
             }
+            i++;
         }while(!item.equals(items[i]));
     }
 }
