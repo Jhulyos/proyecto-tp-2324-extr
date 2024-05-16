@@ -276,26 +276,29 @@ public class Motor {
                 }
             }
             //6. Items
-            Item itemSelec=null;
-            boolean ninguno=false;
-            while (!ninguno&& salaActual.hayItems()) { //Falta hacer un bucle
-                do{
-                    itemSelec = salaActual.seleccionarItem(teclado);
-                }while(itemSelec==null);
-                if (!itemSelec.getDescripcion().equals("NINGUNO")){
-                    if (personaje.anyadirItem(itemSelec)) {
-                        System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
-                        salaActual.eliminarItem(itemSelec.getDescripcion());
-                        System.out.println(personaje.infoMochila());
-                        if (!salaActual.hayItems()) itemSelec=null;
-                    }
-                }else ninguno=true;
+            if(personaje.getVida()>0) {
+                Item itemSelec = null;
+                boolean ninguno = false;
+                while (!ninguno && salaActual.hayItems()) { //Falta hacer un bucle
+                    do {
+                        itemSelec = salaActual.seleccionarItem(teclado);
+                    } while (itemSelec == null);
+                    if (!itemSelec.getDescripcion().equals("NINGUNO")) {
+                        if (personaje.anyadirItem(itemSelec)) {
+                            System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
+                            salaActual.eliminarItem(itemSelec.getDescripcion());
+                            System.out.println(personaje.infoMochila());
+                        }
+                    } else ninguno = true;
+                }
             }
-            salaActual=seleccionarMovimiento(teclado,salaActual);
-            personaje.setFila(salaActual.getFila());
-            personaje.setColumna(salaActual.getColumna());
+            if(personaje.getVida()>0) {
+                salaActual = seleccionarMovimiento(teclado, salaActual);
+                personaje.setFila(salaActual.getFila());
+                personaje.setColumna(salaActual.getColumna());
+            }
         }
-        System.out.println("¡Has completado el laberinto!");
+        if(personaje.getVida()>0) System.out.println("¡Has completado el laberinto!");
     }
 
 
