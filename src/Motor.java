@@ -277,7 +277,7 @@ public class Motor {
             }
             //6. Items
             Item itemSelec=null;
-            while (salaActual.hayItems()||(itemSelec!=null&&!itemSelec.getDescripcion().equals("NINGUNO"))) { //Falta hacer un bucle
+            while (salaActual.hayItems() || ((itemSelec != null) && !itemSelec.getDescripcion().equals("NINGUNO"))) { //Falta hacer un bucle
                 do{
                     itemSelec = salaActual.seleccionarItem(teclado);
                 }while(itemSelec==null);

@@ -288,15 +288,15 @@ public class Sala {
      */
     public void eliminarItem(String descripcion) { //Mover elementos del array al eliminar elementos
         Item item=buscarItem(descripcion);
-        int i=0;
-        do{
+        int i=-1;
+        do {
+            i++;
             if(item.equals(items[i])){
                 for(int j=i;j<items.length;j++){
                     if(j<items.length-1)items[j]=items[j+1];
                     else items[j]=null;
                 }
             }
-            i++;
-        }while(!item.equals(items[i]));
+        }while(!item.equals(items[i])&&((i+1)<items.length));
     }
 }
