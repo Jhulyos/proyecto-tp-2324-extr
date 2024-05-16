@@ -131,7 +131,7 @@ public class Sala {
         Monstruo monstruo=null;
         int i=0;
         do{
-            if(monstruos[i].getNombre().equals(nombreMonstruo))monstruo=monstruos[i];
+            if(monstruos[i]!=null&&monstruos[i].getNombre().equals(nombreMonstruo))monstruo=monstruos[i];
             i++;
         }while(i< monstruos.length && monstruo==null);
         return monstruo;

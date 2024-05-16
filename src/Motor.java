@@ -229,7 +229,11 @@ public class Motor {
             System.out.println(salaActual.getDescripcion());
             //4. Comprobar monstruos, entrar en combate
             while (salaActual.hayMonstruos() && personaje.getVida() > 0) {
-                Monstruo monstruoSelec = salaActual.seleccionarMonstruo(teclado);
+                Monstruo monstruoSelec=null;
+                do {
+                    monstruoSelec = salaActual.seleccionarMonstruo(teclado);
+                    if(monstruoSelec==null) System.out.println("¡Ese monstruo no existe!");
+                }while(monstruoSelec==null);
                 //4.a Comprobar vidas
                 while (monstruoSelec.getVida() > 0 && personaje.getVida() > 0) {
                     //4.b Personaje ataca
@@ -244,7 +248,7 @@ public class Motor {
                     }
                 }
 
-                if (monstruoSelec.getVida() > 0) {
+                if (monstruoSelec.getVida() > 0&&personaje.getVida()<=0) {
                     System.out.println("El monstruo te ha matado. El valor total de tus ítems es " +
                             personaje.getValorMochila());
                 } else {

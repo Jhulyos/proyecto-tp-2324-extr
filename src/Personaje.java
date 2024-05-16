@@ -217,7 +217,9 @@ public class Personaje {
     public double getValorMochila() {
         double valor=0;
         for (Item item : items) {
-            valor += item.getValor();
+            if(item!=null) {
+                valor += item.getValor();
+            }
         }
         return valor;
     }
