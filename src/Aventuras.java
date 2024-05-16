@@ -24,8 +24,8 @@ public class Aventuras {
         Scanner teclado=new Scanner(System.in);
         Personaje personaje=Personaje.crearPersonaje(teclado);
         motor.jugar(teclado,personaje,new Random());
-        mostrarPuntuaciones(args[9]);
         guardarPuntuacion(args[9],personaje);
+        mostrarPuntuaciones(args[9]);
     }
 
     /**

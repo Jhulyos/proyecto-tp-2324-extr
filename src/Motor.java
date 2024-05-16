@@ -263,7 +263,7 @@ public class Motor {
                     if (personaje.getVida() > 0) {
                         //5.a El personaje esquiva la trampa
                         if (personaje.getDestreza() > (random.nextInt(50) + 1)) {
-                            System.out.println("¡Has esquivado la trampa!");
+                            System.out.println("¡Has esquivado la trampa! " + trampas.getDescripcion());
                         }
                         //5.b El personaje NO esquiva la trampa
                         else {
