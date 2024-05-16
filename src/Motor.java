@@ -337,7 +337,7 @@ public class Motor {
                     }
                     break;
                 case "O":
-                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() + 1)) {
+                    if (!existeEnMapa(salaActual.getFila(), salaActual.getColumna() - 1)) {
                         System.out.println("No puedes moverte al oeste.");
                     } else {
                         filaPropuesta = salaActual.getFila();
