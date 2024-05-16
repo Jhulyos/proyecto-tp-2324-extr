@@ -277,7 +277,8 @@ public class Motor {
             }
             //6. Items
             Item itemSelec=null;
-            while (salaActual.hayItems() || ((itemSelec != null) && !itemSelec.getDescripcion().equals("NINGUNO"))) { //Falta hacer un bucle
+            boolean ninguno=false;
+            while (!ninguno&& salaActual.hayItems()) { //Falta hacer un bucle
                 do{
                     itemSelec = salaActual.seleccionarItem(teclado);
                 }while(itemSelec==null);
@@ -286,8 +287,9 @@ public class Motor {
                         System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
                         salaActual.eliminarItem(itemSelec.getDescripcion());
                         System.out.println(personaje.infoMochila());
+                        if (!salaActual.hayItems()) itemSelec=null;
                     }
-                }
+                }else ninguno=true;
             }
             salaActual=seleccionarMovimiento(teclado,salaActual);
             personaje.setFila(salaActual.getFila());
