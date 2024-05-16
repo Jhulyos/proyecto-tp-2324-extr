@@ -74,6 +74,7 @@ public class Motor {
                         Double.parseDouble(linea[3]), Double.parseDouble(linea[4])));
             }
         } catch (Exception e) {
+            System.out.println("Exeption catched");
         } finally {
             if (sc != null) {
                 sc.close();
@@ -276,7 +277,10 @@ public class Motor {
             }
             //6. Items
             if (salaActual.hayItems()) { //Falta hacer un bucle
-                Item itemSelec = salaActual.seleccionarItem(teclado);
+                Item itemSelec=null;
+                do{
+                    itemSelec = salaActual.seleccionarItem(teclado);
+                }while(itemSelec==null);
                 if (!itemSelec.getDescripcion().equals("NINGUNO")){
                     if (personaje.anyadirItem(itemSelec)) {
                         System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
