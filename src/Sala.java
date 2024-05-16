@@ -118,7 +118,7 @@ public class Sala {
      */
     public Monstruo seleccionarMonstruo(Scanner teclado) {
         listarMonstruos();
-        return buscarMonstruo(Utilidades.leerCadena(teclado,"Introduce el nombre del monstruo¨: "));
+        return buscarMonstruo(Utilidades.leerCadena(teclado,"Introduce el nombre del monstruo: "));
     }
 
     /**
