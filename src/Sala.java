@@ -228,7 +228,8 @@ public class Sala {
                 if (items[i]!=null&&items[i].getDescripcion().equals(descripcion)) item = items[i];
                 i++;
             } while (i < items.length && item == null);
-        }
+            if (item==null) System.out.println("No se ha encontrado un item con esa descripción");
+        }else item=new Item("NINGUNO",1,1);
         return item;
     }
 
