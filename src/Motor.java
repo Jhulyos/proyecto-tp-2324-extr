@@ -260,45 +260,45 @@ public class Motor {
             //5. Hay trampas:
             if (personaje.getVida() > 0 && salaActual.hayTrampas()) {
                 for (Trampa trampas : salaActual.getTrampas()) {
-                    if (personaje.getVida() > 0) {
-                        //5.a El personaje esquiva la trampa
-                        if (personaje.getDestreza() > (random.nextInt(50) + 1)) {
-                            System.out.println("¡Has esquivado la trampa! " + trampas.getDescripcion());
-                        }
-                        //5.b El personaje NO esquiva la trampa
-                        else {
-                            personaje.recibirDanyo(trampas.getDanyo());
-                            System.out.println("¡Has caído en una trampa!" + trampas.getDescripcion() + "\nTe ha hecho " +
-                                    trampas.getDanyo() + " puntos de daño.");
-                        }
-                    } else System.out.println("La trampa te ha matado. El valor total de tus ítems es " +
-                            personaje.getValorMochila());
+                    if (trampas!=null){
+                        if (personaje.getVida() > 0) {
+                            //5.a El personaje esquiva la trampa
+                            if (personaje.getDestreza() > (random.nextInt(50) + 1)) {
+                                System.out.println("¡Has esquivado la trampa! " + trampas.getDescripcion());
+                            }
+                            //5.b El personaje NO esquiva la trampa
+                            else {
+                                personaje.recibirDanyo(trampas.getDanyo());
+                                System.out.println("¡Has caído en una trampa!" + trampas.getDescripcion() + "\nTe ha hecho " +
+                                        trampas.getDanyo() + " puntos de daño.");
+                            }
+                        } else System.out.println("La trampa te ha matado. El valor total de tus ítems es " +
+                                personaje.getValorMochila());
+                    }
                 }
             }
             //6. Items
-            if(personaje.getVida()>0) {
-                Item itemSelec = null;
-                boolean ninguno = false;
-                while (!ninguno && salaActual.hayItems()) { //Falta hacer un bucle
-                    do {
+            if (personaje.getVida()>0){
+                Item itemSelec;
+                boolean ninguno=false;
+                while (!ninguno&& salaActual.hayItems()) { //Falta hacer un bucle
+                    do{
                         itemSelec = salaActual.seleccionarItem(teclado);
-                    } while (itemSelec == null);
-                    if (!itemSelec.getDescripcion().equals("NINGUNO")) {
+                    }while(itemSelec==null);
+                    if (!itemSelec.getDescripcion().equals("NINGUNO")){
                         if (personaje.anyadirItem(itemSelec)) {
                             System.out.println("¡Te guardas el objeto! " + itemSelec.toString());
                             salaActual.eliminarItem(itemSelec.getDescripcion());
                             System.out.println(personaje.infoMochila());
                         }
-                    } else ninguno = true;
+                    }else ninguno=true;
                 }
-            }
-            if(personaje.getVida()>0) {
-                salaActual = seleccionarMovimiento(teclado, salaActual);
+                salaActual=seleccionarMovimiento(teclado,salaActual);
                 personaje.setFila(salaActual.getFila());
                 personaje.setColumna(salaActual.getColumna());
             }
         }
-        if(personaje.getVida()>0) System.out.println("¡Has completado el laberinto!");
+        if (salaActual.getDescripcion().equals("Habitación de salida")) System.out.println("¡Has completado el laberinto!");
     }
 
 

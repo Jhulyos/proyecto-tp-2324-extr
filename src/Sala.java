@@ -175,10 +175,10 @@ public class Sala {
     public boolean hayTrampas() {
         boolean resul=false;
         int i=0;
-        do{
-            if (trampas[i]!=null)resul=true;
+        while (i < trampas.length){
+            if(trampas[i]!=null) resul=true;
             i++;
-        }while(i<trampas.length && trampas[i]==null);
+        }
         return resul;
     }
 

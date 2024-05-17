@@ -162,7 +162,7 @@ public class Personaje {
      * @param danyo entero que indica los puntos de ataque que recibe el personaje
      */
     public void recibirDanyo(int danyo) {
-        if (danyo>=0){vida-=ataque;}
+        if (danyo>=0){vida-=danyo;}
     }
 
     /**
